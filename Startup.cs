@@ -77,5 +77,6 @@ namespace JWTAuthentication
                 endpoints.MapControllers();
             });
         }
+
     }
 }

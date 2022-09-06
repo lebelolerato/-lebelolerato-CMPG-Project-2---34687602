@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-
-namespace IoT.Authentication
-{
     namespace JWTAuthentication.Authentication
     {
         public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -18,5 +15,3 @@ namespace IoT.Authentication
             }
         }
     }
-
-}
