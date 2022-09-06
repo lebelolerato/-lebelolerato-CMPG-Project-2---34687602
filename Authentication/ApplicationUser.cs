@@ -3,7 +3,7 @@
 namespace IoT.Authentication
 {
 
-    namespace JWTAuthentication.Authentication
+    namespace IoT.Authentication
     {
         public class ApplicationUser : IdentityUser
         {

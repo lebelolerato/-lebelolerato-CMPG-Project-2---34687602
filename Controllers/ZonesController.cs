@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IoT.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IoT.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ZonesController : ControllerBase
@@ -21,6 +23,7 @@ namespace IoT.Controllers
         }
 
         // GET: api/Zones
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Zone>>> GetZones()
         {
@@ -32,6 +35,7 @@ namespace IoT.Controllers
         }
 
         // GET: api/Zones/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Zone>> GetZone(Guid id)
         {
@@ -51,6 +55,7 @@ namespace IoT.Controllers
 
         // PUT: api/Zones/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutZone(Guid id, Zone zone)
         {
@@ -82,6 +87,7 @@ namespace IoT.Controllers
 
         // POST: api/Zones
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Zone>> PostZone(Zone zone)
         {
@@ -110,6 +116,7 @@ namespace IoT.Controllers
         }
 
         // DELETE: api/Zones/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteZone(Guid id)
         {

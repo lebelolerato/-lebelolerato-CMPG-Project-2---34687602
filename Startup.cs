@@ -1,5 +1,6 @@
-﻿using IoT.Authentication.JWTAuthentication.Authentication;
-using JWTAuthentication.Controllers;
+﻿using IoT.Authentication.IoT.Authentication;
+using IoT.Controllers;
+using IoT.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace JWTAuthentication
+namespace IoT
 {
     public class Startup
     {
@@ -28,11 +29,11 @@ namespace JWTAuthentication
             services.AddControllers();
 
             // For Entity Framework  
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
+            services.AddDbContext<masterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("name=ConnectionStrings:ConnStr")));
 
             // For Identity  
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<masterContext>()
                 .AddDefaultTokenProviders();
 
             // Adding Authentication  
