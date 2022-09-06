@@ -1,5 +1,4 @@
-﻿using IoT.Authentication.IoT.Authentication;
-using IoT.Controllers;
+﻿using JWTAuthentication.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +10,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using IoT.Models;
-using IoT.Authentication;
 
-namespace IoT.Controllers
+namespace JWTAuthentication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace IoT.Authentication
+namespace JWTAuthentication.Authentication
 {
-
-    namespace IoT.Authentication
+    public class ApplicationUser : IdentityUser
     {
-        public class ApplicationUser : IdentityUser
-        {
-        }
     }
-
 }
