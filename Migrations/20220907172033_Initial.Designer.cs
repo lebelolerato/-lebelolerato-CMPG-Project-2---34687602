@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IoT.Migrations
 {
     [DbContext(typeof(masterContext))]
-    [Migration("20220906140921_Second")]
-    partial class Second
+    [Migration("20220907172033_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
