@@ -42,4 +42,10 @@ The following methods are methods contained in the models folder and how they wo
 	- private method in the API that checks if a Device exists (based on the ID parsed through) before editing or deleting an item
 
 
+When connecting to my database and you get an error, please go to the firewall settings and configure them by add a client IP address
 
+	## Database Information
+		user name: cmpg
+		password: Charmain@01
+		Database name: IoTDevices
+		Server name: cmpg323--34687602.database.windows.net
