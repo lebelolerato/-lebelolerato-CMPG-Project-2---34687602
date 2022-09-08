@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IoT.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace IoT.Controllers
 {
@@ -49,6 +50,21 @@ namespace IoT.Controllers
             }
 
             return category;
+        }
+
+        [HttpGet("{id}/ZoneCount")]
+        public async Task<ActionResult<Int64>> GetAssociatedZoneCount(Guid id)
+        {
+            if (_context.Devices == null)
+            {
+                return NotFound();
+            }
+
+            return await _context.Devices
+                        .Where(device => device.CategoryId == id)
+                        .Select(device => device.ZoneId)
+                        .Distinct()
+                        .CountAsync();
         }
 
         // PUT: api/Categories/5
@@ -109,6 +125,21 @@ namespace IoT.Controllers
             }
 
             return CreatedAtAction("GetCategory", new { id = category.CategoryId }, category);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateCatergory(Guid id, [FromBody] JsonPatchDocument<Category> cat)
+        {
+            var p = await _context.Categories.FindAsync(id);
+
+            //check if the device id exists
+            if (p == null)
+                return NotFound();
+
+            cat.ApplyTo(p);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
         // DELETE: api/Categories/5

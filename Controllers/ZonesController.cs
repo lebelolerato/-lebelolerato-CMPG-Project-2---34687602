@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IoT.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace IoT.Controllers
 {
@@ -109,6 +110,21 @@ namespace IoT.Controllers
             }
 
             return CreatedAtAction("GetZone", new { id = zone.ZoneId }, zone);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateZonee(Guid id, [FromBody] JsonPatchDocument<Zone> zone)
+        {
+            var p = await _context.Zones.FindAsync(id);
+
+            //check if the device id exists
+            if (p == null)
+                return NotFound();
+
+            zone.ApplyTo(p);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
         // DELETE: api/Zones/5

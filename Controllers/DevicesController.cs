@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IoT.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace IoT.Controllers
 {
@@ -20,6 +21,13 @@ namespace IoT.Controllers
         public DevicesController(masterContext context)
         {
             _context = context;
+        }
+
+        // GET: api/Devices
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Device>>> GetDevice()
+        {
+            return await _context.Devices.ToListAsync();
         }
 
         // GET: api/Devices
@@ -82,9 +90,11 @@ namespace IoT.Controllers
             return NoContent();
         }
 
-        // POST: api/Devices
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+      
+
+            // POST: api/Devices
+            // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+            [HttpPost]
         public async Task<ActionResult<Device>> PostDevice(Device device)
         {
           if (_context.Devices == null)
@@ -109,6 +119,21 @@ namespace IoT.Controllers
             }
 
             return CreatedAtAction("GetDevice", new { id = device.DeviceId }, device);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateDevice(Guid id, [FromBody] JsonPatchDocument<Device> device)
+        {
+            var p = await _context.Devices.FindAsync(id);
+
+            //check if the device id exists
+            if (p == null)
+                return NotFound();
+
+            device.ApplyTo(p);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
         // DELETE: api/Devices/5
