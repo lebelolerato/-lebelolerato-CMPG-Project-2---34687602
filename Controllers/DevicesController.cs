@@ -23,7 +23,6 @@ namespace IoT.Controllers
         }
 
         // GET: api/Devices
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Device>>> GetDevices()
         {
@@ -35,7 +34,6 @@ namespace IoT.Controllers
         }
 
         // GET: api/Devices/5
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Device>> GetDevice(Guid id)
         {
@@ -55,7 +53,6 @@ namespace IoT.Controllers
 
         // PUT: api/Devices/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDevice(Guid id, Device device)
         {
@@ -87,7 +84,6 @@ namespace IoT.Controllers
 
         // POST: api/Devices
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Device>> PostDevice(Device device)
         {
@@ -116,7 +112,6 @@ namespace IoT.Controllers
         }
 
         // DELETE: api/Devices/5
-        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDevice(Guid id)
         {
